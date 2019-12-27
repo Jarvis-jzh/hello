@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="person.jzh.hello.mybatis.mapper.UserMapper">
+
+  <resultMap id="BaseResultMap" type="person.jzh.hello.mybatis.entity.User">
+    <id column="id" jdbcType="INT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+</mapper>
