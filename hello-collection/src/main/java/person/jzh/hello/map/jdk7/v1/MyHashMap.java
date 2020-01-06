@@ -1,6 +1,6 @@
-package person.jzh.hello.map.v2;
+package person.jzh.hello.map.jdk7.v1;
 
-import person.jzh.hello.map.MyMap;
+import person.jzh.hello.map.jdk7.MyMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
  * @author jzh
  * @version 1.0.0
  * @title MyHashMap
- * @date 2020/1/3 14:57
- * @description：
+ * @date 2020/1/3 9:48
+ * @description： JDK 1.7
  */
-public class MyHashMapV2<K, V> implements MyMap<K, V> {
+public class MyHashMap<K, V> implements MyMap<K, V> {
     // 定义默认数组大小 16 defaultAddSizeFactor = useSize / defaultLenth   4 / 16 = 0.25
     private static int defaultLenth = 1 << 4;
 
@@ -29,13 +29,16 @@ public class MyHashMapV2<K, V> implements MyMap<K, V> {
 
     // 定义Map 骨架数组之一
     private Entry<K, V>[] table = null;
+    // 新的数组，扩容后的数组
+    private Entry<K, V>[] newTable = null;
+
 
     // spring 门面模式运用
-    public MyHashMapV2() {
+    public MyHashMap() {
         this(defaultLenth, defaultAddSizeFactor);
     }
 
-    public MyHashMapV2(int length, double defaultAddSizeFactor) {
+    public MyHashMap(int length, double defaultAddSizeFactor) {
         if (length < 0) {
             throw new IllegalArgumentException("参数不能为负数" + length);
         }
@@ -55,18 +58,22 @@ public class MyHashMapV2<K, V> implements MyMap<K, V> {
         if (useSize > defaultAddSizeFactor * defaultLenth) {
             up2Size();
         }
+        return put(k, v, table);
+    }
+
+    private V put(K k, V v, Entry<K, V>[] entries) {
         // 获取数组位置的方法
-        int index = getIndex(k, table.length);
-        Entry<K, V> entry = table[index];
+        int index = getIndex(k, entries.length);
+        Entry<K, V> entry = entries[index];
         if (entry == null) {
             // Entry：存储在数组和链表当中的数据结构对象
-            table[index] = new Entry(k, v, null);
+            entries[index] = new Entry(k, v, null);
             useSize++;
         } else if (entry != null) {
-            table[index] = new Entry(k, v, entry);
+            entries[index] = new Entry(k, v, entry);
         }
         size++;
-        return table[index].getValue();
+        return entries[index].getValue();
     }
 
     // 定位：寻找存或者取位置
@@ -85,6 +92,12 @@ public class MyHashMapV2<K, V> implements MyMap<K, V> {
 
     // 保证自我判断扩容（数组）
     private void up2Size() {
+        newTable = new Entry[2 * defaultLenth];
+        // 将老数组的内容再次散列 hash 到新数组
+        againHash(newTable);
+    }
+
+    private void againHash(Entry<K, V>[] newTable) {
         List<Entry<K, V>> entryList = new ArrayList<>();
         // for出来后就代表内容全部遍历到 entryList 当中
         for (int i = 0; i < table.length; i++) {
@@ -97,18 +110,20 @@ public class MyHashMapV2<K, V> implements MyMap<K, V> {
 
         // 设置 entryList
         if (entryList.size() > 0) {
-            size = 0;
-            useSize = 0;
             defaultLenth = 2 * defaultLenth;
-            table = new Entry[defaultLenth];
+            useSize = 0;
             for (Entry<K, V> entry : entryList) {
                 // 将所有的链表打断
                 if (entry.next != null) {
                     entry.next = null;
                 }
-                put(entry.getKey(), entry.getValue());
+                // TODO ???
+                // useSize = 0;
+                put(entry.getKey(), entry.getValue(), newTable);
             }
+            table = newTable;
         }
+        newTable = null;
     }
 
     // 这个方法里面不存在我们的 entry == null 的情况
@@ -172,10 +187,10 @@ public class MyHashMapV2<K, V> implements MyMap<K, V> {
 //    }
 
     public int length(){
-        return table.length;
+        return this.table.length;
     }
 
-    public int size() {
+    public int size(){
         return this.size;
     }
 }

@@ -1,4 +1,4 @@
 ## 深入各种集合原理及手写实现
 目前已经实现的
 
-MyMap       手写实现hashMap自动扩容
+MyMap       手写实现hashMap自动扩容(JDK1.7)

@@ -1,4 +1,4 @@
-package person.jzh.hello.map;
+package person.jzh.hello.map.jdk7;
 
 /**
  * @author jzh
@@ -14,15 +14,15 @@ public interface MyMap<K, V> {
     // 快速取
     V get(K k);
 
-    // 定义一个内部接口
-    interface Entry<K, V> {
-        K getKey();
-        V getValue();
-    }
-
     // 用于测试扩充
     // int getUseSize();
     int length();
 
     int size();
+
+    // 定义一个内部接口
+    interface Entry<K, V> {
+        K getKey();
+        V getValue();
+    }
 }

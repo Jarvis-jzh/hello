@@ -1,7 +1,8 @@
 package person.jzh.hello.map;
 
-import person.jzh.hello.map.v1.MyHashMap;
-import person.jzh.hello.map.v2.MyHashMapV2;
+import person.jzh.hello.map.jdk7.MyMap;
+import person.jzh.hello.map.jdk7.v1.MyHashMap;
+import person.jzh.hello.map.jdk7.v2.MyHashMapV2;
 
 import java.util.HashMap;
 import java.util.Map;
