@@ -4,12 +4,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import person.jzh.hello.mybatis.entity.Test;
-import person.jzh.hello.mybatis.mapper.TestMapper;
+import person.jzh.hello.mybatis.mapper.Tesdfsst2Mapper;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
-import static org.apache.ibatis.executor.ExecutionPlaceholder.EXECUTION_PLACEHOLDER;
 
 /**
  * @author jzh
@@ -37,12 +35,12 @@ public class MyBatisDemo {
     }
 
     public static Test get(SqlSession sqlSession, int id) {
-        TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+        Tesdfsst2Mapper testMapper = sqlSession.getMapper(Tesdfsst2Mapper.class);
         return testMapper.selectByPrimaryKey(id);
     }
 
     public static int insert(SqlSession sqlSession, Test test){
-        TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
+        Tesdfsst2Mapper testMapper = sqlSession.getMapper(Tesdfsst2Mapper.class);
         return testMapper.insert(test);
     }
 }

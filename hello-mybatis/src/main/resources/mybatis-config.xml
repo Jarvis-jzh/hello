@@ -15,6 +15,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/TestMapper.xml"/>
+        <mapper resource="mapper/Tesdfsst2Mapper.xml"/>
     </mappers>
 </configuration>

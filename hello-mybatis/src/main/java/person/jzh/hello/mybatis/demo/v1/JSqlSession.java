@@ -22,11 +22,11 @@ public class JSqlSession {
      * getMapper
      * @param clazz
      */
-    public void getMapper(Class clazz) {
-
+    public <T> T getMapper(Class<T> clazz) {
+        return configuration.getMapper(clazz, this);
     }
 
-    public void selectOne() {
-
+    public <T> T selectOne(String statement, String params) {
+        return executor.query(statement, params);
     }
 }
