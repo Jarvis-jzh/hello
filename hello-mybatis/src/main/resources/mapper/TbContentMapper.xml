@@ -3,7 +3,7 @@
 <mapper namespace="person.jzh.hello.mybatis.mapper.UserMapper">
 
   <resultMap id="BaseResultMap" type="person.jzh.hello.mybatis.entity.User">
-    <id column="id" jdbcType="INT" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
 </mapper>
