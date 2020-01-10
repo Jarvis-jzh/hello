@@ -9,7 +9,7 @@ package person.jzh.hello.singleton.lazy;
  */
 public class DoubleCheckSingleton {
 
-    private static DoubleCheckSingleton instance = null;
+    private volatile static DoubleCheckSingleton instance;
 
     private DoubleCheckSingleton() {}
 
