@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>person.jzh.hello</groupId>
+    <artifactId>hello-security</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>hello-security</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+
+        <!-- Spring Boot -->
+        <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
+
+        <!-- MyBatis -->
+        <mybatis-spring-boot.version>2.0.1</mybatis-spring-boot.version>
+        <mybatis-plus.version>3.3.1.tmp</mybatis-plus.version>
+        <lombok.version>1.18.10</lombok.version>
+        <velocity-engine-core.version>2.2</velocity-engine-core.version>
+        <pagehelper.version>1.2.12</pagehelper.version>
+
+        <!-- MySQL -->
+        <mysql.version>5.1.47</mysql.version>
+
+        <!-- Swagger -->
+        <swagger.version>2.9.2</swagger.version>
+
+        <!-- util -->
+        <guava.version>25.1-jre</guava.version>
+        <fastjson.version>1.2.67</fastjson.version>
+        <hutool.version>5.2.4</hutool.version>
+
+        <!-- commons -->
+        <commons-httpclient.version>4.5.1</commons-httpclient.version>
+        <commons-long3.version>3.4</commons-long3.version>
+
+        <!-- Thymeleaf -->
+        <nekohtml.version>1.9.22</nekohtml.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot Start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!-- Spring Boot End -->
+
+        <!-- SpringBoot Security Start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <version>3.0.4.RELEASE</version>
+        </dependency>
+        <!-- SpringBoot Security End -->
+
+        <!-- MyBatis Start -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>${lombok.version}</version>
+        </dependency>
+        <!--  MyBatis End  -->
+
+        <!-- MySQL Start -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <!--  MySQL End  -->
+
+        <!-- Apache Begin -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-long3.version}</version>
+        </dependency>
+        <!-- Apache End -->
+
+        <!-- Thymeleaf Start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>${nekohtml.version}</version>
+        </dependency>
+        <!-- Thymeleaf End -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!-- 资源文件 -->
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>properties/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>cert/*.p12</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>
