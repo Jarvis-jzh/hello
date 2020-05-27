@@ -1,17 +1,16 @@
 package person.jzh.hello.reference;
 
-import java.io.PrintStream;
 import java.lang.ref.WeakReference;
 
-public class WeakRefDemo
-{
+/**
+ * @author jzh
+ * @version 1.0.0
+ * @date 2020/4/27 22:23
+ * @description 
+ */
+public class WeakRefDemo {
 
-    public WeakRefDemo()
-    {
-    }
-
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         demo1();
         System.out.println("------------------------");
         demo2();
@@ -19,42 +18,40 @@ public class WeakRefDemo
         demo3();
         System.out.println("------------------------");
         demo4();
+        System.out.println("------------------------");
+        demo5();
     }
 
-    public static void demo1()
-    {
+    public static void demo1() {
         Object weakObj = new Object();
         WeakReference weakReference = new WeakReference(weakObj);
         System.gc();
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u540E\uFF0Cnull \u4E4B\u524D\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之后，null 之前：").append(weakReference.get()).toString());
         weakObj = null;
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u524D\uFF0Cnull \u4E4B\u540E\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之后，null 之后：").append(weakReference.get()).toString());
         System.gc();
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u540E\uFF0Cnull \u4E4B\u540E\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之后，null 之后：").append(weakReference.get()).toString());
     }
 
-    public static void demo2()
-    {
+    public static void demo2() {
         String str = "hello weak ref";
         WeakReference weakReference = new WeakReference(str);
         str = null;
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u524D\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之前：").append(weakReference.get()).toString());
         System.gc();
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u540E\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之后：").append(weakReference.get()).toString());
     }
 
-    public static void demo3()
-    {
+    public static void demo3() {
         String strObj = new String("hello weak ref");
         WeakReference weakReference = new WeakReference(strObj);
         strObj = null;
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u524D\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之前：").append(weakReference.get()).toString());
         System.gc();
-        System.out.println((new StringBuilder()).append("GC \u4E4B\u540E\uFF1A").append(weakReference.get()).toString());
+        System.out.println((new StringBuilder()).append("GC 之后：").append(weakReference.get()).toString());
     }
 
-    public static void demo4()
-    {
+    public static void demo4() {
         String str = "hello weak ref";
         String strObj = new String("hello weak ref");
         String strObj2 = new String(str);
@@ -65,5 +62,13 @@ public class WeakRefDemo
         System.out.println(strObj2 == str);
         System.out.println(strObj3 == strObj);
         System.out.println(str3 == str);
+    }
+
+    public static void demo5() {
+        WeakReference<M> m = new WeakReference<>(new M());
+
+        System.out.println(m.get());
+        System.gc();
+        System.out.println(m.get());
     }
 }
