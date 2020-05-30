@@ -78,8 +78,8 @@ public class ContentService {
      * @throws IOException
      */
     public List<Map<String, Object>> searchPage(String keyword, int pageNo, int pageSize) throws IOException {
-        if (pageNo <= 1) {
-            pageNo = 1;
+        if (pageNo < 0) {
+            pageNo = 0;
         }
 
         // 条件搜索

@@ -17,7 +17,7 @@ import java.util.List;
  * @author jzh
  * @version 1.0.0
  * @date 2020/5/27 15:37
- * @description
+ * @description 爬虫工具类，获取京东数据
  */
 @Component
 public class HtmlParseUtil {
@@ -25,6 +25,12 @@ public class HtmlParseUtil {
 //        new HtmlParseUtil().parseJD("java").forEach(System.out::println);
 //    }
 
+    /**
+     * 获取京东有关关键字的数据
+     * @param keywords          关键字
+     * @return                  数据集
+     * @throws IOException
+     */
     public List<Content> parseJD(String keywords) throws IOException {
         // 获取请求 https://search.jd.com/Search?keyword=java
         // 前提，需要联网

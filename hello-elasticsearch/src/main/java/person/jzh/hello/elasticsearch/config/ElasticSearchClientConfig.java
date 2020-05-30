@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author jzh
  * @version 1.0.0
  * @date 2020/5/27 13:52
- * @description
+ * @description 配置 ES 高级客户端
  */
 @Configuration
 public class ElasticSearchClientConfig {
